@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Який суперскіл у вашої дитини? Тест для батьків</title>
+<meta name="description" content="7 запитань і 3 практичні рекомендації для батьків.">
+<meta property="og:title" content="Який суперскіл у вашої дитини?">
+<meta property="og:description" content="Квіз для батьків: 7 запитань, 2–3 хвилини.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B1F3B; --ink:#2B2F4A; --muted:#6B6F86; --cream:#FFF8F0; --card:#FFFFFF;
+    --line:#ECE6DD; --accent:#FF6B35; --accent-d:#E85A26;
+    --K:#FF6B35; --S:#3A6FF7; --V:#8B5CF6; --M:#1FA971; --B:#E9A400;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 16px 48px;min-height:100vh}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .brand img{height:28px;width:auto;display:block}
+  .brand span{font-weight:700;font-size:13px;color:var(--muted);border-left:2px solid var(--line);padding-left:12px}
+  .card{background:var(--card);border-radius:24px;padding:28px 24px;box-shadow:0 10px 30px rgba(27,31,59,.07)}
+  h1{font-size:30px;line-height:1.15;margin:0 0 12px;color:var(--navy);font-weight:800}
+  h2{font-size:21px;line-height:1.3;margin:0 0 20px;color:var(--navy);font-weight:700}
+  h3{font-size:16px;margin:0 0 8px;color:var(--navy);font-weight:700}
+  p{margin:0 0 12px}
+  .lead{color:var(--muted);font-size:16px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 24px}
+  .pill{background:var(--cream);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--navy)}
+  .label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:2px solid var(--line);background:#fff;border-radius:14px;padding:10px 14px;font:inherit;font-weight:600;font-size:15px;color:var(--ink);cursor:pointer;transition:.15s}
+  .chip:hover{border-color:#d9cfc2}
+  .chip.on{border-color:var(--accent);background:#FFF1EA;color:var(--accent-d)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:16px;padding:16px 22px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;transition:.15s}
+  .btn-main{background:var(--accent);color:#fff;width:100%;margin-top:24px}
+  .btn-main:hover{background:var(--accent-d)}
+  .btn-main:disabled{background:#F3C4B0;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--line)}
+  .note{font-size:13px;color:var(--muted);margin-top:12px;text-align:center}
+  .notice{background:#EAF7F1;color:#13774F;border-radius:14px;padding:10px 14px;font-weight:600;font-size:14px;margin-bottom:8px}
+  /* quiz */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+  .back{background:none;border:0;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;padding:4px 0}
+  .back[hidden]{display:block;visibility:hidden}
+  .count{font-weight:700;color:var(--muted);font-size:14px}
+  .bar{height:8px;background:#F1EBE2;border-radius:999px;overflow:hidden;margin-bottom:22px}
+  .bar span{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .3s}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;border:2px solid var(--line);background:#fff;border-radius:16px;padding:14px 16px;font:inherit;font-size:15.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:.15s}
+  .opt:hover{border-color:#d9cfc2;transform:translateY(-1px)}
+  .opt.on{border-color:var(--accent);background:#FFF1EA}
+  .opt b{flex:0 0 28px;height:28px;border-radius:9px;background:var(--cream);display:grid;place-items:center;font-size:13px;color:var(--navy)}
+  .opt.on b{background:var(--accent);color:#fff}
+  .fade{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* result */
+  .badge{width:88px;height:88px;border-radius:28px;display:grid;place-items:center;font-size:44px;margin-bottom:16px}
+  .kicker{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  .tagline{font-size:17px;font-weight:600;margin-bottom:14px}
+  .box{border-radius:18px;padding:18px;margin-top:16px}
+  .box.soft{background:var(--cream)}
+  .box.grow{background:#F3F0FF}
+  .box.cta{background:var(--navy);color:#fff}
+  .box.cta h3{color:#fff;font-size:19px}
+  .box.cta p{color:#D9DBEA}
+  .bars{display:grid;gap:10px;margin-top:6px}
+  .brow{display:grid;grid-template-columns:140px 1fr 22px;align-items:center;gap:10px;font-size:14px;font-weight:600;white-space:nowrap}
+  .btrack{height:10px;background:#F1EBE2;border-radius:999px;overflow:hidden}
+  .btrack span{display:block;height:100%;border-radius:999px;width:0;transition:width .8s ease}
+  .bval{text-align:right;color:var(--muted);font-size:13px}
+  .tip{display:flex;gap:10px;margin-top:10px;font-size:15px}
+  .tip::before{content:"🏡";flex:0 0 auto}
+  .actions{display:grid;gap:10px;margin-top:18px}
+  .box.cta .btn-main{margin-top:14px}
+  .btn-light{background:#fff;color:var(--navy)}
+  .small{font-size:13px;color:var(--muted)}
+  @media (max-width:420px){h1{font-size:26px}.card{padding:24px 18px}.brow{grid-template-columns:128px 1fr 18px;font-size:13px;gap:8px}}
+  .role-duo{display:flex;gap:10px;align-items:stretch;margin:12px 0 16px}
+  .role-mini{flex:1;min-width:0;background:var(--cream);border-radius:16px;padding:14px;text-align:center}
+  .role-mini .emoji{font-size:32px;display:block;margin-bottom:4px}
+  .role-mini h3{margin:0 0 3px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .result-section{margin:22px 0 0}
+  .result-section h2{font-size:20px;margin-bottom:8px}
+  .soft-list{display:grid;gap:10px;margin-top:12px}
+  .soft-list > div{background:#FFF8F0;border-radius:14px;padding:13px 15px;font-size:14px}
+  .tip-card{background:#F3F0FF;padding:16px;border-radius:16px;margin-top:10px}
+  .tip-card strong{display:block;margin-bottom:7px;color:var(--navy)}
+  .tip-card p{font-size:14px;margin:0}
+  .muted-callout{background:var(--cream);border-radius:14px;padding:13px 15px;color:var(--ink);font-size:14px;margin-top:12px}
+  .info{font-size:13px;color:var(--muted);margin-top:16px}
+  @media(max-width:420px){.role-duo{gap:8px}.role-mini{padding:12px 8px}}
+
+  /* Компактний екран проходження: менше висоти без втрати зручності натискання. */
+  .wrap{max-width:610px;padding:12px 14px 28px;min-height:unset}
+  .brand{margin-bottom:12px}
+  .quiz-card{padding:20px 20px 18px;border-radius:20px}
+  .quiz-card .top{margin-bottom:9px}
+  .quiz-card .back{font-size:14px}
+  .quiz-card .count{font-size:13px}
+  .quiz-card .bar{height:6px;margin-bottom:15px}
+  .quiz-card h2{font-size:19px;line-height:1.27;margin-bottom:15px}
+  .quiz-card .opts{gap:7px}
+  .quiz-card .opt{min-height:46px;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.35;gap:10px;align-items:center}
+  .quiz-card .opt b{flex-basis:24px;height:24px;border-radius:8px;font-size:12px}
+  .quiz-card .note{font-size:11.5px;margin-top:10px}
+  @media(max-width:420px){.quiz-card{padding:17px 14px}.quiz-card h2{font-size:18px}.quiz-card .opt{padding:9px 10px;font-size:13.5px}}
+
+  /* Результат: чітка ієрархія, компактні тематичні картки та друкований варіант. */
+  .result-page{padding:24px 24px 20px;overflow:hidden}
+  .result-topline{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;letter-spacing:.08em;font-weight:800;text-transform:uppercase;margin-bottom:10px}
+  .result-topline .result-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+  .result-page > h1{font-size:27px;letter-spacing:-.035em;line-height:1.16;margin:0 0 16px}
+  .result-page .role-duo{margin:0;gap:10px}
+  .result-page .role-mini{background:linear-gradient(135deg,#FFF6EE,#FFF0E2);border:1px solid #F7E8DA;border-radius:19px;padding:19px 12px}
+  .result-page .role-mini .emoji{font-size:39px;margin-bottom:8px}
+  .result-page .role-mini h3{font-size:20px;margin-bottom:5px}
+  .result-page .role-mini .small{font-size:13px}
+  .role-description{font-size:14px;line-height:1.58;color:var(--ink);margin:12px 1px 0}
+  .role-disclaimer{font-size:11px;color:var(--muted);margin:7px 1px 0}
+  .result-feature{margin-top:20px;background:#FFF8F0;border:1px solid #F4E9DC;border-radius:20px;padding:19px 17px 17px}
+  .result-feature.bonus{background:#F5F3FF;border-color:#EBE6FF}
+  .section-header{display:flex;align-items:center;gap:11px;margin-bottom:15px}
+  .section-icon{flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#FFE6D7;color:#C94F18;display:grid;place-items:center;font-size:21px}
+  .bonus .section-icon{background:#E6DFFF;color:#6745C8}
+  .section-kicker{font-size:10px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;color:#A76039;margin:0 0 3px}
+  .bonus .section-kicker{color:#7055B9}
+  .section-heading{font-size:19px;letter-spacing:-.02em;line-height:1.25;color:var(--navy);margin:0}
+  .result-feature .soft-list{display:grid;gap:8px;margin:0}
+  .result-feature .soft-list > div{background:white;border:1px solid #F2E7DC;border-radius:13px;padding:12px 13px;font-size:13px;line-height:1.5}
+  .result-feature .soft-list strong{display:block;font-size:14px;color:var(--navy);margin-bottom:3px}
+  .result-feature .soft-list > div div{margin-top:0!important;color:#586078}
+  .result-feature > p{font-size:13px;line-height:1.55}
+  .bonus-summary{color:#636682;font-size:12px;margin:0 0 13px;line-height:1.5}
+  .bonus-grid{display:grid;gap:9px}
+  .bonus-grid .tip-card{display:flex;align-items:flex-start;gap:11px;margin:0;border-radius:14px;background:#fff;border:1px solid #E8E2FC;padding:13px 14px}
+  .tip-counter{flex:0 0 27px;height:27px;width:27px;border-radius:9px;background:#eee7ff;color:#6546B5;font-size:13px;font-weight:800;display:grid;place-items:center}
+  .tip-content{flex:1;min-width:0}
+  .bonus-grid .tip-card strong{font-size:14px;margin:1px 0 5px;color:var(--navy);line-height:1.35}
+  .bonus-grid .tip-card p{font-size:13px;line-height:1.55;color:#555D77}
+
+  /* Персональний PDF-подарунок після трьох рекомендацій. */
+  .gift-panel{margin-top:18px;display:flex;gap:15px;align-items:flex-start;border:1px solid #DAEADf;background:#F0F8F2;border-radius:19px;padding:20px}
+  .gift-symbol{display:grid;place-items:center;flex:0 0 48px;height:48px;border-radius:15px;background:#DBEFE2;font-size:25px}
+  .gift-content{flex:1;min-width:0}
+  .gift-kicker{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#39815A;margin-bottom:6px}
+  .gift-panel h3{font-size:19px;line-height:1.28;color:var(--navy);margin:0 0 9px}
+  .gift-panel p{font-size:13px;line-height:1.6;margin:0 0 12px;color:#485A53}
+  .gift-button{display:inline-flex;align-items:center;justify-content:center;background:#18764B;color:#fff;text-decoration:none;border-radius:12px;font-size:13px;font-weight:800;min-height:44px;padding:11px 15px;max-width:100%;text-align:center}
+  .gift-button:hover{background:#12613D}
+  .gift-hint{margin:7px 0 0!important;font-size:11px!important;color:#64766c!important}
+  @media(max-width:420px){.gift-panel{padding:15px 13px;gap:11px}.gift-symbol{flex-basis:39px;height:39px;font-size:21px}.gift-panel h3{font-size:17px}.gift-button{width:100%}}
+  .course-panel{margin-top:18px;border-radius:19px;background:var(--navy);padding:19px;color:#fff}
+  .course-panel .course-kicker{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#FFAD8D;margin:0 0 7px}
+  .course-panel h3{color:#fff;font-size:19px;margin:0 0 9px;letter-spacing:-.02em}
+  .course-panel p{font-size:13px;color:#D9DBEA;line-height:1.58;margin:0 0 12px}
+  .course-panel .btn-light{margin:12px 0 0!important;width:100%;min-height:47px;padding:12px 15px;font-size:14px;border-radius:12px}
+  .result-page .info{font-size:11px;line-height:1.5;text-align:center;margin:14px 3px 0}
+  .result-actions{display:grid;grid-template-columns:1.15fr 1fr;gap:9px;margin-top:14px}
+  .result-actions .btn{min-height:45px;padding:10px 11px;font-size:12.5px;border-radius:12px}
+  .btn-save{background:#fff;border:1.5px solid #D7D9E5;color:var(--navy)}
+  .btn-save:hover{background:#F6F5FF}
+  .pdf-note{margin-top:7px;color:var(--muted);font-size:10.5px;text-align:center}
+  @media(max-width:420px){.result-page{padding:19px 15px}.result-page > h1{font-size:24px}.section-heading{font-size:17px}.result-feature{padding:15px 12px}.course-panel{padding:16px 13px}.result-actions{grid-template-columns:1fr}.result-actions .btn{font-size:13px}}
+  @media print{
+    @page{size:A4;margin:12mm}
+    html,body{background:#fff!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    .wrap{max-width:none!important;width:100%!important;padding:0!important;min-height:0!important}
+    .brand{margin-bottom:10px}
+    .card.result-page{max-width:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+    .result-feature,.course-panel,.role-mini,.tip-card{break-inside:avoid;page-break-inside:avoid}
+    .result-feature{margin-top:14px}
+    .course-panel,.gift-panel,.result-actions,.pdf-note,.print-hide{display:none!important}
+    .role-disclaimer,.result-page .info{font-size:9px}
+    .result-feature .soft-list{gap:5px}
+    .bonus-grid{gap:6px}
+    a{text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><img src="data:image/png;base64,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" alt="GoITeens" height="28"></div>
+  <div id="app"></div>
+</div>
+
+<script>
+const DATA = {"7-8":[{"q":"Коли дитина захоплюється новою грою або заняттям, що ви найчастіше помічаєте?","o":["Любить пропонувати свої ідеї та залучати інших","Намагається розібратися, як усе працює","Вигадує нові правила або незвичайні способи гри","Може довго займатися тим, що їй цікаво","Любить грати разом і зважає на інших","Поки складно виділити щось одне, її інтереси часто змінюються"],"roles":["K","S","V","B","M",null]},{"q":"Коли дитина може сама обрати, чим зайнятися у вільний час, як вона зазвичай поводиться?","o":["Одразу пропонує своє заняття","Обирає щось знайоме, що вже добре вміє робити","Придумує нову гру або незвичайне заняття","Хоче зайнятися чимось разом із родиною","Спочатку розпитує про можливі варіанти","Часто не може визначитися, просить дорослих обрати за неї або каже, що нічого не хоче"],"roles":["K","B","V","M","S",null]},{"q":"Дитині не вдалося щось зробити з першого разу. Як вона зазвичай реагує?","o":["Злиться, плаче або кидає заняття","Каже, що в неї нічого не виходить і вона не вміє","Просить дорослих зробити замість неї","Навіть після перерви не хоче повертатися до завдання","Засмучується, але з підтримкою пробує ще раз","Зазвичай спокійно шукає інший спосіб"],"roles":[null,null,null,null,null,"V"]},{"q":"Час вимикати мультик або гру на телефоні. Що найчастіше відбувається?","o":["Дитина сильно протестує, може плакати або злитися","Постійно просить ще п'ять хвилин","Погоджується, але потім не знає, чим зайнятися","Продовжує дивитися або грати, доки їй знову не нагадають","Може завершити, якщо попередити заздалегідь","Зазвичай спокійно дотримується домовленостей"]},{"q":"Коли дитина просить купити нову іграшку або щось смачненьке, як вона зазвичай реагує, якщо ви відмовляєте?","o":["Дуже засмучується, плаче або злиться","Продовжує наполягати, навіть після пояснень","Погоджується, але їй складно зрозуміти, чому не можна купити все, що хочеться","Пропонує домовитися, коли можна буде це купити","Зазвичай розуміє, що не всі бажання можна виконати одразу","Складно відповісти, таких ситуацій майже не виникає"],"unknown":[5]},{"q":"Коли дитині потрібно самостійно виконати невелику справу, наприклад зібрати речі чи прибрати іграшки, що відбувається?","o":["Не починає без багаторазових нагадувань","Починає, але швидко відволікається","Просить допомогти навіть із тим, що вже вміє робити","Сперечається або відмовляється","Виконує, якщо разом визначити кілька простих кроків","Зазвичай справляється самостійно"],"roles":[null,null,null,null,null,"B"]},{"q":"Під час гри з іншими дітьми виникає суперечка через іграшку або правила. Як зазвичай реагує ваша дитина?","o":["Наполягає тільки на своєму","Ображається й перестає грати","Поступається, навіть якщо їй цього не хочеться","Одразу кличе дорослого вирішити конфлікт","Намагається домовитися, хоча це не завжди виходить","Зазвичай знаходить рішення разом з іншими"],"roles":[null,null,null,null,null,"M"]}],"9-10":[{"q":"Коли дитина береться за новий проєкт або цікаве завдання, що їй найбільше подобається?","o":["Пропонувати ідеї та залучати інших","Розбиратися в деталях і шукати рішення","Експериментувати й придумувати щось своє","Бачити завершений результат своєї роботи","Працювати разом і допомагати іншим","Поки складно виділити щось одне, інтерес до різних занять часто змінюється"],"roles":["K","S","V","B","M",null]},{"q":"Коли дитина має можливість самостійно придумати, як провести вільний час, що вона найчастіше робить?","o":["Пропонує спільну активність і намагається всіх залучити","Обирає заняття, у якому хоче стати кращою","Вигадує щось незвичайне","Повертається до справи, яку хоче завершити","Цікавиться, що хотіли б робити інші","Часто не може визначитися або чекає, поки хтось запропонує заняття"],"roles":["K","S","V","B","M",null]},{"q":"Коли домашнє завдання або навчальний проєкт виявляється складнішим, ніж очікувала дитина, що найчастіше відбувається?","o":["Швидко засмучується й хоче все кинути","Каже, що вона недостатньо розумна або здібна","Просить дорослого дати готову відповідь","Відкладає завдання, бо не знає, з чого почати","Після підказки пробує знайти рішення сама","Зазвичай самостійно шукає інший спосіб"],"roles":[null,null,null,null,null,"V"]},{"q":"Коли потрібно завершити гру на телефоні або комп'ютері, що відбувається найчастіше?","o":["Починаються сварки, образи або сильне роздратування","Дитина постійно торгується за додатковий час","Продовжує грати, навіть коли домовлений час уже минув","Не знає, чим зайнятися без гаджета","Дотримується правила, якщо про нього нагадати","Зазвичай самостійно завершує гру в домовлений час"]},{"q":"Коли дитина отримує кишенькові або подаровані гроші, як вона зазвичай ними розпоряджається?","o":["Хоче витратити все одразу","Часто купує щось імпульсивно, а потім шкодує","Їй складно відрізнити те, що справді потрібно, від миттєвого бажання","Намагається відкладати гроші, але не завжди дотримується плану","Зазвичай обдумує покупки й може збирати на бажану річ","Поки не має власних грошей або досвіду таких рішень"],"unknown":[5]},{"q":"Коли дитині потрібно самостійно організувати навчання або підготуватися до заняття, що найчастіше відбувається?","o":["Постійно відкладає початок","Легко відволікається на інші справи","Не розуміє, як розподілити час","Боїться зробити неправильно й постійно перепитує","Може організувати роботу за допомогою короткого плану","Зазвичай справляється без нагадувань"],"roles":[null,null,null,null,null,"B"]},{"q":"Друзі пропонують дитині зробити щось, чого вона сама не хоче. Як вона зазвичай реагує?","o":["Погоджується, щоб не засмутити друзів","Не знає, як відмовити","Може різко відповісти або посваритися","Звертається до дорослого, щоб той вирішив за неї","Пробує пояснити свою позицію","Зазвичай може спокійно сказати \"ні\""]}],"11-12":[{"q":"Коли дитина захоплюється новою ідеєю або творчим заняттям, що їй найбільше подобається?","o":["Розповідати про ідею та залучати інших","Продумувати деталі й шукати найкраще рішення","Вигадувати щось незвичайне","Працювати над ідеєю до готового результату","Обговорювати задум з іншими та враховувати їхню думку","Поки складно виділити щось одне або дитина нечасто розповідає про свої захоплення"],"roles":["K","S","V","B","M",null],"unknown":[5]},{"q":"Коли дитина розповідає вам про те, що її зацікавило, як вона зазвичай це робить?","o":["Захоплено розповідає й намагається зацікавити інших","Пояснює деталі та те, як усе працює","Ділиться власними ідеями й фантазіями","Розповідає про те, що вже вдалося зробити або чого досягти","Цікавиться вашою думкою та любить обговорювати","Рідко розповідає про свої інтереси, тому складно відповісти"],"roles":["K","S","V","B","M",null],"unknown":[5]},{"q":"Коли дитина помиляється або в неї щось не виходить, як вона зазвичай реагує?","o":["Сильно засмучується і довго переживає","Починає сумніватися у власних здібностях","Переживає, що інші можуть сміятися або засуджувати","Намагається приховати помилку чи уникнути нової спроби","Після підтримки може сприйняти помилку й спробувати ще раз","Зазвичай сприймає помилки як частину навчання"]},{"q":"Коли дитина розповідає про спілкування з однолітками, що ви найчастіше помічаєте?","o":["Каже, що їй складно знайти спільну мову з іншими","Переживає, що її можуть не прийняти або не зрозуміти","Часто погоджується з іншими, навіть якщо сама думає інакше","Розповідає про непорозуміння, але намагається їх вирішувати","Зазвичай задоволена спілкуванням із друзями","Майже не розповідає про це, тому мені складно відповісти"],"unknown":[5]},{"q":"Коли ви не погоджуєтеся з думкою дитини, як вона зазвичай реагує?","o":["Замовкає й більше не намагається пояснити свою позицію","Засмучується або сприймає незгоду як критику","Починає сперечатися й не хоче слухати аргументи","Намагається пояснити свою думку, але їй буває складно","Зазвичай може спокійно обговорити різні погляди","Складно відповісти, такі розмови виникають рідко"],"unknown":[5]},{"q":"Коли дитині потрібно розповісти про себе, свої інтереси чи досягнення, що для неї найскладніше?","o":["Назвати свої сильні сторони","Говорити про себе без сорому","Зрозуміло сформулювати власні думки","Не порівнювати себе з іншими","Може розповісти про себе після кількох запитань","Зазвичай упевнено розповідає про свої інтереси та досягнення"]},{"q":"Коли дитині пропонують спробувати щось нове, що ви найчастіше помічаєте?","o":["Боїться, що в неї не вийде","Не хоче пробувати без чітких пояснень","Хвилюється, що інші оцінюватимуть результат","Швидко втрачає інтерес, якщо одразу не виходить","Після підтримки охочіше пробує нове","Зазвичай із цікавістю пробує, навіть якщо може помилитися"]}],"13-17":[{"q":"Коли підліток захоплюється новою ідеєю або проєктом, що найчастіше привертає його увагу?","o":["Можливість організувати інших і реалізувати задум","Пошук найкращої стратегії та рішення","Можливість створити щось оригінальне","Досягнення конкретного результату","Співпраця та обмін ідеями з іншими","Має багато різних захоплень, часто пробує щось нове","Мені складно відповісти, підліток мало розповідає про свої захоплення"],"roles":["K","S","V","B","M",null,null],"unknown":[6]},{"q":"Коли підліток розповідає про свої інтереси або плани, що ви найчастіше помічаєте?","o":["Любить пропонувати ідеї та переконувати інших","Намагається все обдумати й прорахувати","Пропонує незвичайні рішення або нові підходи","Говорить про конкретні цілі та результати","Цікавиться думкою інших і любить обговорювати різні погляди","Рідко ділиться такими думками, тому складно відповісти"],"roles":["K","S","V","B","M",null],"unknown":[5]},{"q":"Коли підліток стикається з критикою своєї роботи або ідеї, як він зазвичай реагує?","o":["Сприймає критику дуже особисто","Починає сумніватися у власних здібностях","Відразу захищається й не хоче слухати","Втрачає бажання продовжувати роботу","Може обговорити зауваження, хоча це буває непросто","Зазвичай може відокремити корисні зауваження від особистої оцінки"]},{"q":"Коли підлітку потрібно самостійно підготуватися до важливого завдання або проєкту, що найчастіше заважає?","o":["Постійно відкладає справу на останній момент","Не може визначити, що важливіше","Планує забагато й не встигає виконати задумане","Швидко втрачає мотивацію, якщо результат не видно одразу","Може організувати роботу, якщо має чіткий план","Зазвичай самостійно планує час і виконує завдання"],"roles":[null,null,null,null,null,"B"]},{"q":"Коли ваші думки з підлітком не збігаються, як він зазвичай поводиться?","o":["Мовчить, щоб уникнути суперечки","Погоджується, але пізніше все одно робить по-своєму","Висловлюється, але йому складно пояснити свої аргументи","Починає сперечатися й важко сприймає іншу точку зору","Пробує аргументувати свою позицію та вислухати вас","Зазвичай може спокійно й конструктивно обговорити різні думки"]},{"q":"Коли підліток замислюється про майбутнє, навчання або професію, що для нього найскладніше?","o":["Зрозуміти власні інтереси та сильні сторони","Визначити, чого він хоче досягти","Обрати між кількома можливостями","Перетворити бажання на конкретні кроки","Має певні ідеї, але потребує допомоги з плануванням","Уже має власні цілі та поступово рухається до них"]},{"q":"Коли підлітку потрібно ухвалити важливе для себе рішення, що найчастіше викликає труднощі?","o":["Боїться помилитися й довго відкладає вибір","Надто орієнтується на думку інших","Не знає, як оцінити можливі наслідки","Приймає рішення імпульсивно, а потім шкодує","Обговорює варіанти з близькими, щоб визначитися","Зазвичай може самостійно оцінити варіанти й зробити вибір"]}]};
+const TOPICS = {"7-8":["emotion","screens","money","organization","friendship"],"9-10":["confidence","screens","money","organization","boundaries"],"11-12":["mistakes","peers","voice","selfworth","newthings"],"13-17":["feedback","planning","voice","goals","decisions"]};
+const GOOD = {"7-8":[4,4,3,4,4],"9-10":[4,4,4,4,4],"11-12":[4,3,4,4,4],"13-17":[4,4,4,4,4]};
+const TIPS = {"7-8":{"emotion":["Як пережити невдачу","Коли щось не виходить, дитині може бути важко впоратися з розчаруванням.","Після невдачі спочатку назвіть почуття: «Ти засмутився, бо не вийшло». Коли дитина заспокоїться, разом придумайте один інший спосіб спробувати знову.","Запропонуйте дитині розповісти про невелику невдачу й те, як їй вдалося впоратися з нею."],"screens":["Домовленості про гаджети","Завершення улюбленої гри чи мультфільму може викликати суперечки.","Ще до початку гри домовтеся про час завершення, попередьте за кілька хвилин і запропонуйте дитині вибрати наступне заняття.","Разом складіть просте правило користування гаджетом і запитайте, чи воно зручне для всіх."],"money":["Бажання та покупки","Відмова в покупці може бути складною темою для родини. Це ще не свідчить про рівень фінансової грамотності дитини.","Під час наступної покупки обговоріть різницю між «хочу» та «потрібно». Запропонуйте вибрати одну річ зараз, а іншу записати в список бажань.","Зробіть сімейний список «хочу» і «потрібно» та обговоріть, чому деякі покупки варто відкласти."],"organization":["Маленькі кроки до самостійності","Почати просту справу та довести її до кінця іноді непросто без підтримки дорослого.","Перед прибиранням або збиранням речей запропонуйте назвати три маленькі кроки. Допоможіть із першим, а наступний дайте зробити самостійно.","Запропонуйте дитині самій обрати одну посильну домашню справу на завтра."],"friendship":["Як домовитися після суперечки","У грі не завжди просто висловити свою думку й почути іншого.","Розіграйте з іграшками суперечку через одну річ. Попросіть дитину запропонувати два варіанти рішення, які враховують обох учасників.","Обговоріть улюблену історію: як герої могли домовитися, коли хотіли різного?"]},"9-10":{"confidence":["Складне завдання — не вирок","Коли навчання стає складнішим, дитина може сумніватися в собі або уникати нової спроби.","Замість готової відповіді запитайте: «Що вже вийшло? На якому кроці стало складно? Який один спосіб спробуємо ще?»","Разом пригадайте завдання, яке колись здавалося складним, а згодом стало зрозумілим."],"screens":["Правила екранного часу","Важливо навчитися завершувати гру за домовленістю, а не тільки після нагадувань.","Запропонуйте дитині самій сформулювати правило: скільки часу на гру, як дізнатися, що час вийшов, і що робити після завершення.","Запропонуйте дитині самій спланувати одне заняття без екрана на вихідні."],"money":["План маленької покупки","Кишенькові гроші — нагода тренувати обдуманий вибір, а не перевірка «правильності» дитини.","Оберіть бажану покупку й порівняйте два варіанти: купити щось дешевше зараз або відкладати частину грошей на велику ціль.","Попросіть дитину назвати одну фінансову ціль і придумати, як можна поступово на неї відкладати."],"organization":["План, який можна виконати","Почати роботу та розподілити час буває складно без простого плану.","Перед заняттям нехай дитина сама запише три кроки й вибере перший. Після завершення коротко обговоріть, що допомогло.","Запропонуйте дитині скласти власний мініплан підготовки до наступного заняття."],"boundaries":["Практика спокійного «ні»","У стосунках із друзями може бути складно захистити власне бажання без сварки.","Пограйте в коротку рольову сценку: друг пропонує те, чого не хочеться. Разом придумайте ввічливу, але чітку відповідь і альтернативу.","Спробуйте разом придумати три способи ввічливо відмовитися від небажаної пропозиції."]},"11-12":{"mistakes":["Помилка не визначає здібності","Через помилки дитина іноді може сумніватися в собі.","Пригадайте одну невдалу спробу. Запитайте: «Що ти зрозумів? Що зробив би інакше?» Поділіться власним прикладом помилки.","Запропонуйте поділитися маленьким відкриттям, яке з’явилося завдяки помилці."],"peers":["Розмова про однолітків","Спілкування з друзями може викликати хвилювання або непорозуміння.","Без поспіху запитайте: «З ким тобі зараз цікаво проводити час? Що вам подобається робити разом?» Не вимагайте детальних звітів.","Запитайте, що дитині найбільше подобається у спілкуванні з друзями."],"voice":["Висловити думку й почути іншого","У розмові з дорослими дитині іноді складно відстояти свою думку без сварки.","Оберіть нейтральну тему з різними поглядами. По черзі озвучте свою позицію й один аргумент; спочатку повторіть, що почули від іншого.","Запропонуйте обговорити дві точки зору на нейтральну тему без пошуку «переможця»."],"selfworth":["Помічати свої сильні сторони","Розповідати про свої досягнення буває непросто.","Запропонуйте назвати одну річ, яка вдалася цього тижня, і пояснити, що саме допомогло. Розкажіть про власний приклад.","Запропонуйте за хвилину розповісти про улюблену справу, а потім поділіться, що вам було цікаво почути."],"newthings":["Пробувати без страху ідеальності","Нові заняття іноді лякають через невідомість або страх помилитися.","Запропонуйте невеликий творчий експеримент на 10 хвилин, де немає оцінок і «правильного» результату. Після обговоріть, що було цікавим.","Спробуйте імпровізаційну гру «Так, і…»: по черзі додавайте по одному реченню до спільної історії."],"contact":["Почніть із цікавості, а не розпитування","Ви відзначили, що не завжди знаєте про інтереси або спілкування дитини. Це не означає, що у вас поганий контакт.","Оберіть спокійний момент і поставте одне запитання: «Що останнім часом тебе найбільше зацікавило?» або «Що було найцікавішим цього тижня?» Вислухайте без оцінок і не наполягайте на відповіді.","Запитайте, чим дитині хотілося б поділитися з вами цього тижня."]},"13-17":{"feedback":["Як ставитися до критики","Критика може викликати сильні переживання або бажання припинити спроби.","Якщо підліток згоден, обговоріть один відгук до його роботи. Разом відокремте факт, оцінне судження і пораду, яку варто перевірити.","Обговоріть, як зрозуміти різницю між корисним відгуком і неконструктивною критикою."],"planning":["Перший крок замість великого плану","Організація часу або визначення пріоритетів може даватися нелегко.","Запропонуйте обрати одну справу на тиждень, визначити результат і три невеликі кроки. Нехай підліток сам обере зручний спосіб відстеження.","Запропонуйте підлітку показати власний спосіб планування та запитайте, що йому в ньому подобається."],"voice":["Розмова з різними позиціями","Висловити свою думку й почути іншу може бути непросто.","Оберіть тему, де ви не згодні. Спочатку кожен своїми словами переказує позицію іншого, лише потім називає власний аргумент.","Обговоріть без оцінок цікаве питання, на яке немає однієї правильної відповіді."],"goals":["Від інтересу до невеликої цілі","Визначитися з майбутнім чи перетворити бажання на конкретні дії буває складно.","Запитайте: «Що тобі було б цікаво спробувати протягом місяця?» Якщо підліток хоче, допоможіть сформулювати перший невеликий крок.","Запитайте, чим зараз хочеться займатися більше, і чи є щось, для чого потрібна ваша підтримка."],"decisions":["Вибір і його наслідки","Самостійні рішення потребують практики: не завжди легко оцінити варіанти.","Для не надто важливого рішення запропонуйте порівняти два варіанти: переваги, можливі наслідки й перший крок. Рішення залиште підлітку.","Попросіть підлітка розповісти про вибір, яким він задоволений, і що допомогло визначитися."],"contact":["Дізнайтеся більше про світ підлітка","Ви відзначили, що підліток мало розповідає про свої інтереси. Це не означає, що між вами немає довіри.","Спробуйте запитати: «Що зараз тебе захоплює, навіть якщо я в цьому не розбираюся?» або «Якщо я хочу краще зрозуміти твої інтереси, з чого мені почати?» Не оцінюйте відповідь і поважайте право не говорити зараз.","Запитайте, чи є заняття або тема, про яку підліток хотів би вам розповісти."]}};
+const ROLES = {"K":{"name":"Капітан","emoji":"🧭","bg":"#FFF1EA","color":"#E85A26","tag":"Ініціатива й уміння залучати інших","desc":"У ваших відповідях проявляється готовність пропонувати ідеї, розпочинати спільні справи та залучати інших. Це цікава риса, яку варто підтримувати."},"S":{"name":"Стратег","emoji":"♟️","bg":"#ECF1FF","color":"#3A6FF7","tag":"Увага до деталей і пошук рішень","desc":"У ваших відповідях проявляється цікавість до того, як усе влаштовано, та бажання спочатку розібратися в ситуації."},"V":{"name":"Винахідник","emoji":"💡","bg":"#F3EEFF","color":"#8B5CF6","tag":"Допитливість та нестандартні ідеї","desc":"У ваших відповідях проявляється інтерес до нових підходів, експериментів і власних ідей."},"M":{"name":"Миротворець","emoji":"🤝","bg":"#E8F7F0","color":"#1FA971","tag":"Увага до людей і співпраці","desc":"У ваших відповідях проявляється бажання враховувати інших, домовлятися та робити щось спільно."},"B":{"name":"Будівничий","emoji":"🧱","bg":"#FFF6DD","color":"#A77A00","tag":"Послідовність і орієнтація на результат","desc":"У ваших відповідях проявляється інтерес до завершення справ, практичного результату та поступової роботи над метою."}};
+const COURSES = {"7-8":{"name":"LetMe Teens","url":"https://let-me-teens.goiteens.com/","text":"На LetMe Teens діти 7–10 років у рольових іграх і практичних ситуаціях тренують уміння говорити про почуття, домовлятися, планувати прості справи, робити вибір і розуміти бажання та покупки. Навички формуються поступово."},"9-10":{"name":"LetMe Teens","url":"https://let-me-teens.goiteens.com/","text":"На LetMe Teens діти 7–10 років практикують спілкування, самостійні рішення, організацію навчання, домовленості про гаджети та обдумані покупки. На заняттях вони пробують нові способи дії, а не отримують обіцянку миттєвих змін."},"11-12":{"name":"Майстерня лідерства Junior","url":"https://goiteens.com/course/leader/","text":"У Майстерні лідерства Junior (11–12 років) діти тренують самовираження, упевненість, комунікацію, емоційний інтелект і креативність через ігри, імпровізацію, мініпроєкти та короткі виступи."},"13-17":{"name":"Майстерня лідерства Teens","url":"https://goiteens.com/course/leader/","text":"У Майстерні лідерства Teens (13–17 років) підлітки практикують постановку цілей, організацію часу, аргументацію, критичне мислення, командну роботу та презентацію власних проєктів."}};
+const AGES=[['7-8','7–8 років'],['9-10','9–10 років'],['11-12','11–12 років'],['13-17','13–17 років']];
+const state={age:null,i:0,ans:Array(7).fill(null),prefilled:false};
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const isUnknown=(age,q,a)=>DATA[age][q].unknown?.includes(a)??false;
+const questions=age=>DATA[age];
+const shareUrl=()=>{const u=new URL(location.href);u.search='';u.hash='';return u.toString();};
+(function readParams(){
+  const p=new URLSearchParams(location.search),age=p.get('age'),q1=p.get('q1');
+  if(AGES.some(x=>x[0]===age))state.age=age;
+  // Не зараховуємо старий q1 з попередніх версій, де був інший порядок варіантів.
+  if(p.get('version')==='3'&&q1!==null&&Number.isInteger(Number(q1))&&Number(q1)>=0&&Number(q1)<(state.age?DATA[state.age][0].o.length:6)){
+    state.ans[0]=Number(q1);state.prefilled=true;
+  }
+})();
+function renderStart(){
+ app.innerHTML=`<div class="card fade">
+  ${state.prefilled?'<div class="notice">✓ Першу відповідь збережено. Продовжуйте квіз.</div>':''}
+  <h1>Який суперскіл у вашої дитини?</h1>
+  <p class="lead">У кожної дитини є свої сильні сторони, а ще ситуації, у яких їй потрібна підтримка. Відповідайте на запитання про звичні моменти вдома та дізнайтеся, як допомогти дитині розвивати корисні навички.</p>
+  <div class="meta"><span class="pill">⏱ 2–3 хвилини</span><span class="pill">7 запитань</span><span class="pill">Без правильних відповідей</span></div>
+  <div class="box soft" style="margin-bottom:18px"><h3>Після квізу ви отримаєте</h3><p style="margin:0">Погляд на сильні сторони дитини, ситуації, на які можна звернути увагу, та <strong>3 практичні рекомендації</strong>, які можна спробувати вдома.</p></div>
+  <div class="label">Скільки років дитині?</div>
+  <div class="chips">${AGES.map(([v,t])=>`<button class="chip ${state.age===v?'on':''}" data-age="${v}">${t}</button>`).join('')}</div>
+  <button class="btn btn-main" id="go" ${state.age?'':'disabled'}>${state.prefilled?'Продовжити квіз →':'Почати квіз →'}</button>
+  <p class="note">Це не психологічна діагностика. Обирайте той варіант, який найчастіше нагадує поведінку дитини.</p>
+ </div>`;
+ app.querySelectorAll('[data-age]').forEach(b=>b.onclick=()=>{if(state.age!==b.dataset.age){state.ans=Array(7).fill(null);state.prefilled=false;}state.age=b.dataset.age;renderStart()});
+ document.getElementById('go').onclick=()=>{state.i=state.prefilled?1:0;renderQ()};
+}
+function renderQ(){
+ const items=questions(state.age),item=items[state.i],n=state.i+1;
+ app.innerHTML=`<div class="card quiz-card fade"><div class="top"><button class="back" id="back">← Назад</button><span class="count">${n} / ${items.length}</span></div>
+ <div class="bar"><span style="width:${state.i/items.length*100}%"></span></div>
+ <h2>${esc(item.q)}</h2><div class="opts">${item.o.map((o,j)=>`<button class="opt ${state.ans[state.i]===j?'on':''}" data-j="${j}"><b>${'АБВГДЕЄ'[j]}</b><span>${esc(o)}</span></button>`).join('')}</div>
+ <p class="note">Оберіть один варіант, який найбільше відповідає вашому досвіду.</p></div>`;
+ document.getElementById('back').onclick=()=>{if(!state.i)renderStart();else{state.i--;renderQ()}};
+ app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{state.ans[state.i]=Number(b.dataset.j);if(state.i<items.length-1){state.i++;renderQ()}else renderResult();window.scrollTo({top:0,behavior:'smooth'});});
+}
+// Додаткові спостережувані сильні сторони у питаннях 3–7.
+// Не приписуємо роль негативній реакції чи відповіді «не знаю».
+const ROLE_HINTS={
+ '7-8':{2:{4:'B',5:'V'},3:{4:'B',5:'B'},4:{3:'M',4:'S'},5:{4:'S',5:'B'},6:{4:'M',5:'M'}},
+ '9-10':{2:{4:'B',5:'V'},3:{4:'B',5:'B'},4:{3:'B',4:'S'},5:{4:'S',5:'B'},6:{4:'K',5:'K'}},
+ '11-12':{2:{4:'B',5:'B'},3:{3:'M',4:'M'},4:{3:'K',4:'M'},5:{4:'K',5:'K'},6:{4:'V',5:'V'}},
+ '13-17':{2:{4:'M',5:'S'},3:{4:'B',5:'B'},4:{4:'M',5:'M'},5:{4:'S',5:'B'},6:{4:'S',5:'S'}}
+};
+function evaluate(age,answers){
+ const qs=DATA[age],scores={K:0,S:0,V:0,M:0,B:0},observations=[],positive=[],unknown=[],contact=[];
+ for(let i=0;i<7;i++){
+   const a=answers[i],q=qs[i];if(a===null||a===undefined||!q.o[a])continue;
+   if(isUnknown(age,i,a)){
+      unknown.push(i);
+      // Лише відповіді про недостатню поінформованість стають підставою для вправи «контакт».
+      if((age==='11-12'&&[1,3].includes(i))||(age==='13-17'&&[0,1].includes(i)))contact.push(i);
+      continue;
+   }
+   const role=q.roles?.[a] || ROLE_HINTS[age]?.[i]?.[a] ||
+     (i===0 && a===5 && age==='13-17' ? 'V' : null);
+   if(role&&Object.prototype.hasOwnProperty.call(scores,role))scores[role]++;
+   if(i>=2){
+     const k=TOPICS[age][i-2],isStrong=a>=GOOD[age][i-2];
+     (isStrong?positive:observations).push({topic:k,index:i,answer:a,strength:isStrong,score:isStrong?0:(a<=1?2:1)});
+   }
+ }
+ // Обираємо одну провідну роль за кількістю спостережуваних позитивних ознак.
+ // Якщо кілька ролей набрали порівну, перевага — першій конкретній відповіді
+ // про сильну сторону; негативні/невідомі відповіді ніколи не дають балів.
+ const highest=Math.max(...Object.values(scores));
+ const signalCount=Object.values(scores).reduce((sum,value)=>sum+value,0);
+ const concernCount=observations.length;
+ const winners=highest>0?Object.keys(scores).filter(k=>scores[k]===highest):[];
+ const firstSignal=[];
+ for(let i=0;i<7;i++){
+   const a=answers[i];
+   if(a===null||a===undefined||isUnknown(age,i,a))continue;
+   const key=qs[i].roles?.[a] || ROLE_HINTS[age]?.[i]?.[a] ||
+     (i===0 && a===5 && age==='13-17' ? 'V' : null);
+   if(key)firstSignal.push(key);
+ }
+ const primary=winners.length?firstSignal.find(k=>winners.includes(k)):null;
+ const roles=primary?[primary]:[];
+ // Один сюжет — одна рекомендація. Не використовуємо сумнівні відсотки «сили навички».
+ const ranked=observations.slice().sort((a,b)=>b.score-a.score||a.index-b.index);
+ const selections=[];
+ if(contact.length&&TIPS[age].contact)selections.push({key:'contact',kind:'contact'});
+ const candidates=[...ranked.map(x=>({key:x.topic,kind:'difficulty'})),...positive.map(x=>({key:x.topic,kind:'practice'}))];
+ for(const candidate of candidates){if(selections.length>=3)break;if(!selections.some(x=>x.key===candidate.key))selections.push(candidate);}
+ // Якщо труднощів мало або відповіді невідомі, додаємо нейтральні практики з тем програми.
+ for(const key of TOPICS[age]){if(selections.length>=3)break;if(!selections.some(x=>x.key===key))selections.push({key,kind:'practice'});}
+ return {scores,winners,roles,highest,signalCount,concernCount,observations,positive,unknown,contact,selections:selections.slice(0,3)};
+}
+
+// Універсальні PDF-подарунки, заздалегідь завантажені на Google Диск.
+// На сторінці результату показуємо ОДИН файл, який відповідає віку й відповідям.
+const PDF_GIFTS={
+  conversation:{
+    title:'20 питань за вечерею замість «Як у школі?»',
+    url:'https://drive.google.com/file/d/1jPSmYS4LZcwxhmrp8rCRJXsJw4bPgJQM/view?usp=sharing',
+    description:'Готові запитання для щирих розмов про інтереси, почуття, дружбу та мрії — без допитів і оцінювання.'
+  },
+  phrases:{
+    title:'12 фраз, які ми кажемо дітям щодня, і чим їх замінити',
+    url:'https://drive.google.com/file/d/12CINv-T3mCqyiGSLFYEgx_Ozobd3eyck/view?usp=drive_link',
+    description:'Коротка шпаргалка для ситуацій, коли дитина сердиться, помиляється, сперечається або потребує підтримки.'
+  },
+  roadmap:{
+    title:'Вікова карта софт-скілів: 10, 13 і 16 років',
+    url:'https://drive.google.com/file/d/1_8GxJWmLmIhVD7Ul_KPCR6f7_K2SDsba/view?usp=sharing',
+    description:'Зручний чек-лист, щоб разом помічати прогрес у спілкуванні, самостійності, ухваленні рішень та інших навичках.'
+  }
+};
+function pickPdfGift(age,result){
+  // Батьки прямо зазначили, що мало знають про інтереси чи переживання дитини.
+  // Це найсильніший сигнал для карток із розмовами, незалежно від інших труднощів.
+  if(result.contact.length) return PDF_GIFTS.conversation;
+  const difficulties=new Set(result.observations.map(x=>x.topic));
+  if(age==='7-8'){
+    // Картка 10/13/16 не релевантна семирічним і восьмирічним дітям.
+    return difficulties.has('friendship') && !difficulties.has('emotion') && !difficulties.has('organization')
+      ?PDF_GIFTS.conversation:PDF_GIFTS.phrases;
+  }
+  if(age==='9-10'){
+    if(difficulties.has('screens') || difficulties.has('confidence') || difficulties.has('boundaries')) return PDF_GIFTS.phrases;
+    if(difficulties.has('organization') || difficulties.has('money')) return PDF_GIFTS.roadmap;
+    return PDF_GIFTS.roadmap;
+  }
+  if(age==='11-12'){
+    if(difficulties.has('peers') || difficulties.has('voice')) return PDF_GIFTS.conversation;
+    if(difficulties.has('mistakes') || difficulties.has('selfworth')) return PDF_GIFTS.phrases;
+    return PDF_GIFTS.roadmap;
+  }
+  // 13–17: питання для контакту і карта вікових навичок — найбільш придатні.
+  if(difficulties.has('voice') || difficulties.has('feedback')) return PDF_GIFTS.conversation;
+  return PDF_GIFTS.roadmap;
+}
+
+function renderResult(){
+ const age=state.age,r=evaluate(age,state.ans),course=COURSES[age],ageText=AGES.find(x=>x[0]===age)[1],gift=pickPdfGift(age,r);
+ let roleHtml='';
+ if(r.roles.length){
+  roleHtml=`<div class="role-duo">${r.roles.map(k=>{const a=ROLES[k];return `<div class="role-mini"><span class="emoji">${a.emoji}</span><h3 style="color:${a.color}">${a.name}</h3><span class="small">${a.tag}</span></div>`}).join('')}</div>
+   <p class="role-description">${r.roles.length===1?ROLES[r.roles[0]].desc:'У відповідях однаково помітні дві різні сильні сторони. Вони можуть доповнювати одна одну.'}</p>
+   <p class="role-disclaimer">Це один із можливих проявів сильних сторін дитини за вашими відповідями, а не оцінка її особистості.</p>`;
+ }else{
+  roleHtml=`<div class="muted-callout"><strong>Кожна дитина має свої сильні сторони 💛</strong><p style="margin:6px 0 0">Цього разу відповіді більше розповіли про ситуації, у яких дитині потрібна підтримка, ніж про її звичні сильні сторони. Нижче — три практичні ідеї для вашої родини.</p></div>`;
+
+ }
+ const headings={"7-8":"Ситуації, на які можна звернути увагу","9-10":"Ситуації, на які можна звернути увагу","11-12":"На що можна звернути увагу","13-17":"На що можна звернути увагу"};
+ let observationHtml;
+ if(r.observations.length){
+  observationHtml=`<div class="soft-list">${r.observations.slice(0,3).map(x=>`<div><strong>${esc(TIPS[age][x.topic][0])}</strong><div style="margin-top:4px">${esc(TIPS[age][x.topic][1])}</div></div>`).join('')}</div>`;
+ }else if(r.contact.length){
+  observationHtml='<p>Ви зазначили, що не про всі інтереси чи ситуації дитини маєте інформацію. Це не ознака проблеми — просто привід для спокійної розмови.</p>';
+ }else{
+  observationHtml='<p>Ви не відзначили помітних труднощів у запропонованих ситуаціях. Нижче — ідеї для підтримки й подальшого розвитку навичок.</p>';
+ }
+ if(r.contact.length&&r.observations.length)observationHtml+='<p class="small" style="margin-top:12px">Деякі ситуації вам поки недостатньо відомі. Ми включили до рекомендацій ідею для розмови з дитиною.</p>';
+ const tipHtml=r.selections.map((item,i)=>{const t=TIPS[age][item.key];const desc=item.kind==='difficulty'?t[2]:t[3];return `<div class="tip-card"><span class="tip-counter">${i+1}</span><div class="tip-content"><strong>${esc(t[0])}</strong><p>${esc(desc)}</p></div></div>`}).join('');
+ app.innerHTML=`<div class="card result-page fade" id="resultPage">
+  <div class="result-topline"><span class="result-dot"></span> Результат квізу · ${ageText}</div>
+  <h1>Сильні сторони вашої дитини</h1>
+  ${roleHtml}
+  <section class="result-feature" aria-labelledby="observationsTitle">
+   <div class="section-header"><span class="section-icon" aria-hidden="true">◎</span><div><div class="section-kicker">Ваші спостереження</div><h2 class="section-heading" id="observationsTitle">${headings[age]}</h2></div></div>
+   ${observationHtml}
+  </section>
+  <section class="result-feature bonus" aria-labelledby="bonusTitle">
+   <div class="section-header"><span class="section-icon" aria-hidden="true">✦</span><div><div class="section-kicker">Ваш бонус · для вашої родини</div><h2 class="section-heading" id="bonusTitle">3 практичні рекомендації</h2></div></div>
+   <p class="bonus-summary">Спробуйте ці прості дії вдома — з урахуванням віку дитини та ваших відповідей.</p>
+   <div class="bonus-grid">${tipHtml}</div>
+  </section>
+  <section class="gift-panel print-hide" aria-labelledby="giftTitle">
+   <div class="gift-symbol" aria-hidden="true">🎁</div>
+   <div class="gift-content">
+     <div class="gift-kicker">Додатковий подарунок від GoITeens</div>
+     <h3 id="giftTitle">${esc(gift.title)}</h3>
+     <p>${esc(gift.description)}</p>
+     <a class="gift-button" href="${esc(gift.url)}" target="_blank" rel="noopener noreferrer">Переглянути та завантажити PDF ↗</a>
+     <p class="gift-hint">Відкриється Google Диск, де можна переглянути або завантажити матеріал.</p>
+   </div>
+  </section>
+  <section class="course-panel print-hide"><div class="course-kicker">Продовжити розвиток навичок</div><h3>Як це тренують на заняттях?</h3><p>${esc(course.text)}</p>
+   <a class="btn btn-light" href="${esc(course.url)}" target="_blank" rel="noopener noreferrer">Дізнатися більше про курс →</a>
+  </section>
+  <p class="info">Цей квіз — не психологічна діагностика й не вимірювання рівня навичок. Він допомагає помітити звичні ситуації та знайти ідеї для практики.</p>
+  <div class="result-actions print-hide"><button class="btn btn-save" id="saveResult" type="button">↓ Зберегти результат у PDF</button><button class="btn btn-ghost" id="again" type="button">Пройти ще раз</button></div>
+  <p class="pdf-note print-hide">Для збереження оберіть у вікні друку «Зберегти як PDF».</p>
+ </div>`;
+ document.getElementById('again').onclick=()=>{state.ans=Array(7).fill(null);state.prefilled=false;state.i=0;renderStart();window.scrollTo(0,0)};
+ document.getElementById('saveResult').onclick=()=>{window.print()};
+}
+if(state.prefilled&&state.age){state.i=1;renderQ()}else renderStart();
+
+</script>
+</body>
+</html>
